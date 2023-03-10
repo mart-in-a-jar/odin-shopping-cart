@@ -1,0 +1,10 @@
+.load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.items {
+    padding: 10px;
+
+}

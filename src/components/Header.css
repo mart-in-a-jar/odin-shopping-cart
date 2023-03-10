@@ -29,8 +29,11 @@ nav {
     margin: 10px 10px;
 }
 
-.menu-item {
+.menu-item,
+.button {
+    background-color: transparent;
     border: 2px solid;
     border-radius: 5px;
     padding: 8px;
+    cursor: pointer;
 }
