@@ -27,17 +27,12 @@ const Items = () => {
     };
 
     const products = items.map((item) => {
-        return (
-            <div key={item.id}>
-                <Link to={`/items/${item.id}`}>{item.title}</Link>
-                <br />
-            </div>
-        );
+        return <ItemCard key={item.id} item={item} />;
     });
 
     return (
-        <div className="items">
-            {products}
+        <div className="product-page">
+            <div className="items">{products}</div>
             {amount < 20 && <LoadMoreButton loadMore={loadMore} />}
         </div>
     );
@@ -53,8 +48,19 @@ const LoadMoreButton = ({ loadMore }) => {
     );
 };
 
-const ItemCard = () => {
-    return <div>Hei</div>;
+const ItemCard = ({ item }) => {
+    return (
+        <div className="product-card">
+            <Link to={`/items/${item.id}`}>
+                <div className="image">
+                    <img src={item.image} alt={item.title} />
+                </div>
+                <div className="title">{item.title}</div>
+            </Link>
+            <div className="divider"></div>
+            <div>add to cart</div>
+        </div>
+    );
 };
 
 export default Items;
