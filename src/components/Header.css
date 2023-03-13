@@ -37,3 +37,8 @@ nav {
     padding: 8px;
     cursor: pointer;
 }
+
+.header {
+    /* width: 100%; */
+    border: 1px dashed green;
+}

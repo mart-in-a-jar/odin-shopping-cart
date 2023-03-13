@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Route } from "react-router-dom";
 import "./Items.css";
 
 const Items = () => {
@@ -32,12 +32,15 @@ const Items = () => {
 
     return (
         <div className="product-page">
+            <ItemMenu />
+
             <div className="items">{products}</div>
             {amount < 20 && <LoadMoreButton loadMore={loadMore} />}
         </div>
     );
 };
 
+// BUTTON TO LOAD MORE ITEMS
 const LoadMoreButton = ({ loadMore }) => {
     return (
         <div className="load-more">
@@ -48,6 +51,7 @@ const LoadMoreButton = ({ loadMore }) => {
     );
 };
 
+// ITEM CARD
 const ItemCard = ({ item }) => {
     return (
         <div className="product-card">
@@ -59,6 +63,31 @@ const ItemCard = ({ item }) => {
             </Link>
             <div className="divider"></div>
             <div>add to cart</div>
+        </div>
+    );
+};
+
+// ITEM MENU
+const ItemMenu = () => {
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const getCategories = async () => {
+            const response = await fetch(
+                "https://fakestoreapi.com/products/categories"
+            ).then((res) => res.json());
+            setCategories(response);
+        };
+        getCategories();
+    }, []);
+    return (
+        <div className="item-menu">
+            {categories.map((cat, n) => {
+                return (
+                    <NavLink key={n} to={cat} className="category">
+                        <li>{cat}</li>
+                    </NavLink>
+                );
+            })}
         </div>
     );
 };

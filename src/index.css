@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
     font-family: sans-serif;
+    overflow-y: scroll;
 }
 
 *,
@@ -16,7 +17,7 @@ body {
 }
 
 .main {
-    max-width: 1200px;
-    min-width: 900px;
+    width: 1200px;
     border: 3px dotted;
+    min-height: 100vh;
 }

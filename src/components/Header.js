@@ -5,7 +5,7 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Header = ({ cartAmount }) => {
     return (
-        <nav>
+        <nav className="header">
             <ul className="menu">
                 <NavLink to="/">
                     <li className="menu-item">Home</li>
