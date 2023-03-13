@@ -75,7 +75,7 @@
 }
 
 .item-menu a:hover {
-    background-color: rgba(0, 0, 0, 0.050);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .item-menu a.active {

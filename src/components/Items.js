@@ -8,7 +8,8 @@ const Items = () => {
 
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(6);
-    const [category, setCategory] = useState("all");
+    const [category, setCategory] = useState("all items");
+    const [displayLoadButton, setDisplayLoadButton] = useState(true);
 
     useEffect(() => {
         const getItems = async () => {
@@ -21,6 +22,11 @@ const Items = () => {
             const products = await fetch(
                 shopUrl + categoryQuery + limitQuery
             ).then((result) => result.json());
+            if (products.length < amount) {
+                setDisplayLoadButton(false);
+            } else {
+                setDisplayLoadButton(true);
+            }
             setItems(products);
         };
         getItems();
@@ -28,6 +34,10 @@ const Items = () => {
 
     const loadMore = () => {
         setAmount((prevAmount) => prevAmount + 3);
+        setTimeout(() => {
+            const newItems = document.querySelector(".product-card:nth-last-child(6)");
+            newItems.scrollIntoView();
+        }, 250);
     };
 
     const products = items.map((item) => {
@@ -38,7 +48,7 @@ const Items = () => {
         <div className="product-page">
             <ItemMenu onClick={setCategory} />
             <div className="items">{products}</div>
-            {amount < 20 && <LoadMoreButton loadMore={loadMore} />}
+            {displayLoadButton && <LoadMoreButton loadMore={loadMore} />}
         </div>
     );
 };
@@ -78,9 +88,7 @@ const ItemMenu = ({ onClick }) => {
             const response = await fetch(
                 "https://fakestoreapi.com/products/categories"
             ).then((res) => res.json());
-            setCategory((prevState) => {
-                return [...prevState, ...response];
-            });
+            setCategory(["all items", ...response]);
         };
         getCategories();
     }, []);
