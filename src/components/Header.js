@@ -10,7 +10,7 @@ const Header = ({ cartAmount }) => {
                 <NavLink to="/">
                     <li className="menu-item">Home</li>
                 </NavLink>
-                <NavLink to="/items">
+                <NavLink to="/items/category/all-items">
                     <li className="menu-item">Items</li>
                 </NavLink>
                 <NavLink to="/cart">

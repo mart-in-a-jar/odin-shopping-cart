@@ -13,7 +13,7 @@ function App() {
                 <Header cartAmount={10} />
                 <Routes>
                     <Route path="/" element={<div>Hei home page</div>} />
-                    <Route path="/items" element={<Items />} />
+                    <Route path="/items/category/:category" element={<Items />}/>
                     <Route path="/items/:id" element={<Item />} />
                     <Route path="/cart" element={<Cart />} />
                 </Routes>

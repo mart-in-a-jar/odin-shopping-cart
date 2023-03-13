@@ -1,26 +1,30 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Route } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Items.css";
+import urlSlug from "url-slug";
 
 const Items = () => {
     const shopUrl = "https://fakestoreapi.com/products";
 
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(6);
+    const [category, setCategory] = useState("all");
 
     useEffect(() => {
         const getItems = async () => {
-            let query = "";
+            const categoryQuery =
+                category === "all items" ? "" : "/category/" + category;
+            let limitQuery = "";
             if (amount) {
-                query = `?limit=${amount}`;
+                limitQuery = `?limit=${amount}`;
             }
-            const products = await fetch(shopUrl + query).then((result) =>
-                result.json()
-            );
+            const products = await fetch(
+                shopUrl + categoryQuery + limitQuery
+            ).then((result) => result.json());
             setItems(products);
         };
         getItems();
-    }, [amount]);
+    }, [amount, category]);
 
     const loadMore = () => {
         setAmount((prevAmount) => prevAmount + 3);
@@ -32,8 +36,7 @@ const Items = () => {
 
     return (
         <div className="product-page">
-            <ItemMenu />
-
+            <ItemMenu onClick={setCategory} />
             <div className="items">{products}</div>
             {amount < 20 && <LoadMoreButton loadMore={loadMore} />}
         </div>
@@ -68,14 +71,16 @@ const ItemCard = ({ item }) => {
 };
 
 // ITEM MENU
-const ItemMenu = () => {
-    const [categories, setCategories] = useState([]);
+const ItemMenu = ({ onClick }) => {
+    const [categories, setCategory] = useState(["all items"]);
     useEffect(() => {
         const getCategories = async () => {
             const response = await fetch(
                 "https://fakestoreapi.com/products/categories"
             ).then((res) => res.json());
-            setCategories(response);
+            setCategory((prevState) => {
+                return [...prevState, ...response];
+            });
         };
         getCategories();
     }, []);
@@ -83,7 +88,14 @@ const ItemMenu = () => {
         <div className="item-menu">
             {categories.map((cat, n) => {
                 return (
-                    <NavLink key={n} to={cat} className="category">
+                    <NavLink
+                        key={n}
+                        to={"/items/category/" + urlSlug(cat)}
+                        className="category"
+                        onClick={() => {
+                            onClick(cat);
+                        }}
+                    >
                         <li>{cat}</li>
                     </NavLink>
                 );
