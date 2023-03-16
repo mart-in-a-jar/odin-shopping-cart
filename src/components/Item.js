@@ -16,7 +16,11 @@ const Item = () => {
         getItem();
     }, [shopUrl]);
 
-    return <div>{item.title}</div>;
+    return (
+        <div>
+            <pre style={{whiteSpace: "pre-wrap"}}>{JSON.stringify(item, null, 2)}</pre>
+        </div>
+    );
 };
 
 export default Item;
