@@ -81,3 +81,79 @@
 .item-menu a.active {
     background-color: rgb(255, 222, 173);
 }
+
+.price:before {
+    content: "$ ";
+}
+
+.price {
+    font-size: 1.4rem;
+}
+
+.product-card-actions {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+}
+
+.add-to-cart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    height: 40px;
+}
+
+.amount-picker input {
+    flex-shrink: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+.amount-picker {
+    min-width: 0;
+    display: flex;
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 20px;
+}
+
+.add-to-cart button,
+.add-to-cart input {
+    height: 100%;
+}
+
+.add-to-cart button {
+    cursor: pointer;
+}
+
+.amount-picker button {
+    width: 35px;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.amount-picker button:disabled {
+    cursor: default;
+}
+
+.amount-picker button,
+.amount-picker input {
+    border: none;
+}
+
+.add-to-cart-button {
+    justify-self: end;
+}
+
+.add-to-cart-button button {
+    background-color: rgb(238, 173, 53);
+    border-radius: 20px;
+    border: 0;
+    padding: 12px 15px;
+}
+
+.add-to-cart input:focus {
+    outline: none;
+}
