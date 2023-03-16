@@ -7,6 +7,7 @@ const Items = () => {
     const shopUrl = "https://fakestoreapi.com/products";
     const urlParams = useParams();
 
+    // Get this as a parameter?
     const CATEGORIESTEMPLATE = {
         name: "all items",
         slug: urlSlug("all items"),
@@ -69,11 +70,7 @@ const Items = () => {
             const products = await fetch(
                 shopUrl + categoryQuery + limitQuery
             ).then((result) => result.json());
-            if (products.length < amount) {
-                setDisplayLoadButton(false);
-            } else {
-                setDisplayLoadButton(true);
-            }
+            
             setItems(products);
             console.log(currentCategory);
             console.log("products fetched");
@@ -82,6 +79,15 @@ const Items = () => {
             getItems();
         }
     }, [amount, currentCategory, shouldFetchItems, CATEGORIESTEMPLATE.name]);
+
+    // Show/hide "load more.."
+    useEffect(() => {
+        if (items.length < amount) {
+            setDisplayLoadButton(false);
+        } else {
+            setDisplayLoadButton(true);
+        }
+    },[items, amount])
 
     const loadMore = () => {
         setAmount((prevAmount) => prevAmount + 3);
