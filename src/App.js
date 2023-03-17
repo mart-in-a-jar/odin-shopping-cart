@@ -70,7 +70,16 @@ function App() {
                         path="/items/:id"
                         element={<Item addToCart={addToCart} />}
                     />
-                    <Route path="/cart" element={<Cart items={cartItems} />} />
+                    <Route
+                        path="/cart"
+                        element={
+                            <Cart
+                                items={cartItems}
+                                changeAmount={addToCart}
+                                deleteProduct={deleteFromCart}
+                            />
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </div>

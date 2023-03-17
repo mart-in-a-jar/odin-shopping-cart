@@ -29,7 +29,7 @@ export default function AmountPicker({ onChange, amount }) {
     // Update parent
     useEffect(() => {
         onChange(actualAmount);
-    }, [actualAmount, onChange]);
+    }, [actualAmount]);
 
     // Update from parent
     useEffect(() => {

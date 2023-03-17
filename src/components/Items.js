@@ -143,13 +143,14 @@ const ItemCard = ({ item, addToCart }) => {
             </Link>
             <div className="divider"></div>
             <div className="product-card-actions">
-                <div className="price">{item.price}</div>
+                <div className="price">{(item.price).toFixed(2)}</div>
                 <AddToCartModule item={item} addToCartFunc={addToCart} />
             </div>
         </div>
     );
 };
 
+// ADD TO CART
 const AddToCartModule = ({ item, addToCartFunc }) => {
     const [amount, setAmount] = useState(1);
 
