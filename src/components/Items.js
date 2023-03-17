@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
-import "./Items.css";
+import "./Items.scss";
 import urlSlug from "url-slug";
 
 const Items = () => {

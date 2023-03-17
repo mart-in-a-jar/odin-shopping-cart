@@ -14,13 +14,18 @@
 .product-card {
     border: 1px dashed;
     padding: 15px;
-}
 
-.product-card a {
-    color: black;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
+    a {
+        color: black;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    img {
+        max-width: 60%;
+        max-height: 100%;
+    }
 }
 
 .image {
@@ -29,11 +34,6 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
-}
-
-.product-card img {
-    max-width: 60%;
-    max-height: 100%;
 }
 
 .title {
@@ -59,6 +59,16 @@
     align-items: center;
     height: 30px;
     background-color: blanchedalmond;
+
+    a {
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        &.active {
+            background-color: rgb(255, 222, 173);
+        }
+    }
 }
 
 .category {
@@ -74,20 +84,12 @@
     align-items: center;
 }
 
-.item-menu a:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.item-menu a.active {
-    background-color: rgb(255, 222, 173);
-}
-
-.price:before {
-    content: "$ ";
-}
-
 .price {
     font-size: 1.4rem;
+
+    &::before {
+        content: "$ ";
+    }
 }
 
 .product-card-actions {
@@ -101,12 +103,10 @@
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     height: 40px;
-}
 
-.amount-picker input {
-    flex-shrink: 1;
-    min-width: 0;
-    text-align: center;
+    button {
+        cursor: pointer;
+    }
 }
 
 .amount-picker {
@@ -115,45 +115,42 @@
     width: 100%;
     border: 1px solid grey;
     border-radius: 20px;
-}
 
-.add-to-cart button,
-.add-to-cart input {
-    height: 100%;
-}
+    input {
+        flex-shrink: 1;
+        min-width: 0;
+        text-align: center;
 
-.add-to-cart button {
-    cursor: pointer;
-}
+        &:focus {
+            outline: none;
+        }
+    }
 
-.amount-picker button {
-    width: 35px;
-    flex-shrink: 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: transparent;
-}
+    button {
+        width: 35px;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        background-color: transparent;
 
-.amount-picker button:disabled {
-    cursor: default;
-}
+        &:disabled {
+            cursor: default;
+        }
+    }
 
-.amount-picker button,
-.amount-picker input {
-    border: none;
+    button,
+    input {
+        border: none;
+    }
 }
 
 .add-to-cart-button {
     justify-self: end;
-}
 
-.add-to-cart-button button {
-    background-color: rgb(238, 173, 53);
-    border-radius: 20px;
-    border: 0;
-    padding: 12px 15px;
-}
-
-.add-to-cart input:focus {
-    outline: none;
+    button {
+        background-color: rgb(238, 173, 53);
+        border-radius: 20px;
+        border: 0;
+        padding: 12px 15px;
+    }
 }
