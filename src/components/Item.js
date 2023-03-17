@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Item = () => {
+const Item = ({ addToCart }) => {
     const { id } = useParams();
     const shopUrl = "https://fakestoreapi.com/products/" + id;
     const [item, setItem] = useState({});
@@ -18,7 +18,9 @@ const Item = () => {
 
     return (
         <div>
-            <pre style={{whiteSpace: "pre-wrap"}}>{JSON.stringify(item, null, 2)}</pre>
+            <pre style={{ whiteSpace: "pre-wrap" }}>
+                {JSON.stringify(item, null, 2)}
+            </pre>
         </div>
     );
 };

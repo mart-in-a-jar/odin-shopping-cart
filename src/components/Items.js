@@ -3,7 +3,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import "./Items.scss";
 import urlSlug from "url-slug";
 
-const Items = () => {
+const Items = ({ addToCart }) => {
     const shopUrl = "https://fakestoreapi.com/products";
     const urlParams = useParams();
 
@@ -107,7 +107,7 @@ const Items = () => {
     };
 
     const products = items.map((item) => {
-        return <ItemCard key={item.id} item={item} />;
+        return <ItemCard key={item.id} item={item} addToCart={addToCart} />;
     });
 
     return (
@@ -131,7 +131,7 @@ const LoadMoreButton = ({ loadMore }) => {
 };
 
 // ITEM CARD
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, addToCart }) => {
     return (
         <div className="product-card">
             <Link to={`/items/${item.id}`}>
@@ -143,19 +143,20 @@ const ItemCard = ({ item }) => {
             <div className="divider"></div>
             <div className="product-card-actions">
                 <div className="price">{item.price}</div>
-                <AddToCartModule item={item} />
+                <AddToCartModule item={item} addToCartFunc={addToCart} />
             </div>
         </div>
     );
 };
 
-const AddToCartModule = ({item}) => {
+const AddToCartModule = ({ item, addToCartFunc }) => {
     const [displayedAmount, setDisplayedAmount] = useState(1);
     const [actualAmount, setActualAmount] = useState(1);
 
     const addToCart = () => {
-        console.log(actualAmount + " * " + item.title)
-    }
+        addToCartFunc(item, actualAmount);
+        setDisplayedAmount(1);
+    };
 
     const handleInput = ({ target }) => {
         if (target.value > 0 && target.value < 100) {
@@ -237,5 +238,6 @@ const ItemMenu = ({ onClick, categories }) => {
         </div>
     );
 };
+
 
 export default Items;

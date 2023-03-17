@@ -1,4 +1,5 @@
-const Cart = () => {
+const Cart = ({ items }) => {
+    console.log(items);
     return <div>Hei cart!</div>;
 };
 
