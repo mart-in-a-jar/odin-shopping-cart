@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import "./Items.scss";
 import urlSlug from "url-slug";
+import AmountPicker from "./AmountPicker";
 
 const Items = ({ addToCart }) => {
     const shopUrl = "https://fakestoreapi.com/products";
@@ -150,66 +151,16 @@ const ItemCard = ({ item, addToCart }) => {
 };
 
 const AddToCartModule = ({ item, addToCartFunc }) => {
-    const [displayedAmount, setDisplayedAmount] = useState(1);
-    const [actualAmount, setActualAmount] = useState(1);
+    const [amount, setAmount] = useState(1);
 
     const addToCart = () => {
-        addToCartFunc(item, actualAmount);
-        setDisplayedAmount(1);
+        addToCartFunc(item, amount);
+        setAmount(1);
     };
-
-    const handleInput = ({ target }) => {
-        if (target.value > 0 && target.value < 100) {
-            setDisplayedAmount(+target.value);
-        } else if (target.value === "") {
-            setDisplayedAmount("");
-        }
-    };
-    const handleFocus = () => {
-        setDisplayedAmount("");
-    };
-    const handleBlur = ({ target }) => {
-        if (target.value === "") {
-            setDisplayedAmount(actualAmount);
-        }
-    };
-    useEffect(() => {
-        if (displayedAmount > 0 && displayedAmount < 100) {
-            setActualAmount(displayedAmount);
-        }
-    }, [displayedAmount]);
 
     return (
         <div className="add-to-cart">
-            <div className="amount-picker">
-                <button
-                    disabled={actualAmount <= 1}
-                    onClick={() => {
-                        setDisplayedAmount((prevAmount) => {
-                            return prevAmount - 1;
-                        });
-                    }}
-                >
-                    -
-                </button>
-                <input
-                    type="tel"
-                    value={displayedAmount}
-                    onChange={handleInput}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                />
-                <button
-                    disabled={actualAmount >= 99}
-                    onClick={() => {
-                        setDisplayedAmount((prevAmount) => {
-                            return prevAmount + 1;
-                        });
-                    }}
-                >
-                    +
-                </button>
-            </div>
+            <AmountPicker onChange={setAmount} amount={amount}/>
             <div className="add-to-cart-button">
                 <button onClick={addToCart}>Add to cart</button>
             </div>
@@ -238,6 +189,5 @@ const ItemMenu = ({ onClick, categories }) => {
         </div>
     );
 };
-
 
 export default Items;
