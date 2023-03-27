@@ -128,6 +128,9 @@ const CartSummary = ({ sum }) => {
                     <div className="bar-text">{freeShipping ? "🎉" : `$${sum} / $${amountForFreeShipping}`}</div>
                 </div>
             </div>
+            <div className="checkout">
+                <button>Checkout</button>
+            </div>
         </div>
     );
 };
