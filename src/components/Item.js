@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useHeadingUpdate from "./useHeadingUpdate";
 
-const Item = ({ addToCart }) => {
+const Item = ({ addToCart, setPage }) => {
     const { id } = useParams();
     const shopUrl = "https://fakestoreapi.com/products/" + id;
     const [item, setItem] = useState({});
@@ -15,6 +16,8 @@ const Item = ({ addToCart }) => {
         };
         getItem();
     }, [shopUrl]);
+
+    useHeadingUpdate(item.title, setPage)
 
     return (
         <div>

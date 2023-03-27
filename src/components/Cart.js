@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import AmountPicker from "./AmountPicker";
 import "./Cart.scss";
+import useHeadingUpdate from "./useHeadingUpdate";
 
-const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
+const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
     const cartHeader = (
         <div className="cart-header">
             <button
@@ -11,7 +12,7 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
                     deleteProduct(null, true);
                 }}
             >
-                Clear basket
+                Clear cart
             </button>
         </div>
     );
@@ -33,6 +34,8 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
             </ul>
         </>
     );
+
+    useHeadingUpdate("shopping cart", setPage)
 
     return (
         <div className="cart">

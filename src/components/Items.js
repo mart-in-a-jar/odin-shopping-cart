@@ -3,6 +3,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import "./Items.scss";
 import urlSlug from "url-slug";
 import AmountPicker from "./AmountPicker";
+import useHeadingUpdate from "./useHeadingUpdate";
 
 const Items = ({ addToCart, setPage }) => {
     const shopUrl = "https://fakestoreapi.com/products";
@@ -59,9 +60,7 @@ const Items = ({ addToCart, setPage }) => {
     }, [allCategories, urlParams.category]);
 
     // Set current page header
-    useEffect(() => {
-        setPage(currentCategory.name);
-    }, [currentCategory.name]);
+    useHeadingUpdate(currentCategory.name, setPage)
 
     // Fetch items
     useEffect(() => {

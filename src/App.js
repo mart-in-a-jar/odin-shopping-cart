@@ -6,6 +6,7 @@ import Cart from "./components/Cart";
 import Item from "./components/Item";
 import Items from "./components/Items";
 import { useEffect, useState } from "react";
+import Home from "./components/Home";
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
@@ -75,7 +76,7 @@ function App() {
             <BrowserRouter>
                 <Header cartAmount={numberOfItemsInCart} page={currentPage} />
                 <Routes>
-                    <Route path="/" element={<div>Hei home page</div>} />
+                    <Route path="/" element={<Home setPage={setCurrentPage} />} />
                     <Route
                         path="/items/category/:category"
                         element={
@@ -102,6 +103,7 @@ function App() {
                                 changeAmount={addToCart}
                                 deleteProduct={deleteFromCart}
                                 sumTotal={cartTotal}
+                                setPage={setCurrentPage}
                             />
                         }
                     />
