@@ -2,29 +2,40 @@ import { Link } from "react-router-dom";
 import AmountPicker from "./AmountPicker";
 import "./Cart.scss";
 
-const Cart = ({ items, changeAmount, deleteProduct }) => {
-    const cartContent =
-        items.length > 0 ? (
-            <>
-                <CartItemsHeader />
-                {items.map((item) => {
-                    return (
-                        <CartItemLine
-                            key={item.item.id}
-                            item={item}
-                            changeAmount={changeAmount}
-                            deleteProduct={deleteProduct}
-                        />
-                    );
-                })}
-            </>
-        ) : (
-            <div className="no-items">Your cart is empty.</div>
-        );
+const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
+    const cartContent = (
+        <>
+            <CartItemsHeader />
+            {items.map((item) => {
+                return (
+                    <CartItemLine
+                        key={item.item.id}
+                        item={item}
+                        changeAmount={changeAmount}
+                        deleteProduct={deleteProduct}
+                    />
+                );
+            })}
+        </>
+    );
 
     return (
-        <div className="cart-items">
-            <ul className="item-lines">{cartContent}</ul>
+        <div className="cart">
+            {items.length > 0 ? (
+                // If items
+                <>
+                    <div className="cart-items">
+                        <ul className="item-lines">{cartContent}</ul>
+                    </div>
+                    <button className="deleteAll" onClick={() => {
+                        deleteProduct(null, true)
+                    }}>Clear basket</button>
+                    <div className="total price">{sumTotal}</div>
+                </>
+            ) : (
+                // If empty cart
+                <div className="no-items">Your cart is empty.</div>
+            )}
         </div>
     );
 };

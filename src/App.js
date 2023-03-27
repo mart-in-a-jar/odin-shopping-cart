@@ -32,8 +32,9 @@ function App() {
         });
     };
 
-    const deleteFromCart = (item) => {
+    const deleteFromCart = (item, all = false) => {
         setCartItems((prevCart) => {
+            if (all) return [];
             return prevCart.filter((ele) => {
                 return item.id !== ele.item.id;
             });
@@ -60,9 +61,11 @@ function App() {
         localStorage.setItem("cart", JSON.stringify(cartItems));
 
         // Update total sum
-        const sum = cartItems.reduce((a, b) => {
-            return a + b.amount * b.item.price;
-        }, 0).toFixed(2);
+        const sum = cartItems
+            .reduce((a, b) => {
+                return a + b.amount * b.item.price;
+            }, 0)
+            .toFixed(2);
         setCartTotal(sum);
     }, [cartItems]);
 
