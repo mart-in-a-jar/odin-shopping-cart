@@ -29,12 +29,22 @@
         }
 
         .amount {
-            max-width: 100px;
+            .amount-picker {
+                max-width: 100px;
+            }
+        }
+        .delete {
+            .button-delete {
+                background-color: transparent;
+                border: 0;
+                cursor: pointer;
+                font-size: 2rem;
+                color: red
+            }
         }
     }
     .cart-items-header {
         height: 40px;
-        border-bottom: 1px solid;
     }
     .cart-items-header,
     .item-line {
@@ -43,4 +53,15 @@
         align-items: center;
         gap: 15px;
     }
+    .item-lines {
+        margin: 0;
+        padding: 0;
+    }
+
+    [class^="col"] {
+        display: flex;
+        justify-content: center;
+    }
+
+    padding: 0 15px;
 }

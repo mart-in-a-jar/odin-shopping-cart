@@ -26,14 +26,17 @@
         max-width: 60%;
         max-height: 100%;
     }
+
+    .image {
+        height: 300px;
+        margin-bottom: 15px;
+    }
 }
 
 .image {
-    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .title {

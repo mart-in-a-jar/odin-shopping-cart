@@ -1,29 +1,31 @@
-import { useCallback } from "react";
 import { Link } from "react-router-dom";
 import AmountPicker from "./AmountPicker";
 import "./Cart.scss";
 
 const Cart = ({ items, changeAmount, deleteProduct }) => {
-
-    const itemlines =
-        items.length > 0
-            ? items.map((item) => {
-                  return (
-                      <CartItemLine
-                          key={item.item.id}
-                          item={item}
-                          changeAmount={changeAmount}
-                          deleteProduct={deleteProduct}
-                      />
-                  );
-              })
-            : <div className="no-items">Your cart is empty.</div>;
+    const cartContent =
+        items.length > 0 ? (
+            <>
+                <CartItemsHeader />
+                {items.map((item) => {
+                    return (
+                        <CartItemLine
+                            key={item.item.id}
+                            item={item}
+                            changeAmount={changeAmount}
+                            deleteProduct={deleteProduct}
+                        />
+                    );
+                })}
+            </>
+        ) : (
+            <div className="no-items">Your cart is empty.</div>
+        );
 
     return (
-        <ul className="cart-items">
-            <CartItemsHeader />
-            {itemlines}
-        </ul>
+        <div className="cart-items">
+            <ul className="item-lines">{cartContent}</ul>
+        </div>
     );
 };
 
@@ -32,10 +34,10 @@ const CartItemsHeader = () => {
         <div className="cart-items-header">
             <div></div>
             <div></div>
-            <div className="amount-heading">Amount</div>
-            <div className="price-heading">Price</div>
-            <div className="total-price-heading">Total</div>
-            <div className="delete-heading">Delete</div>
+            <div className="col heading-amount">Amount</div>
+            <div className="col heading-price">Price</div>
+            <div className="col heading-total-price">Total</div>
+            <div className="col heading-delete">Delete</div>
         </div>
     );
 };
@@ -59,17 +61,21 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
                 <div className="item-name">{item.item.title}</div>
                 <div className="description">{item.item.description}</div>
             </div>
-            <div className="amount">
+            <div className="col amount">
                 <AmountPicker
                     amount={item.amount}
                     onChange={handleChangeAmount}
                 />
             </div>
-            <div className="price">{item.item.price}</div>
-            <div className="total price">{(item.amount * item.item.price).toFixed(2)}</div>
-            <button className="delete" onClick={handleDelete}>
-                X
-            </button>
+            <div className="col price">{item.item.price}</div>
+            <div className="col total-price">
+                {(item.amount * item.item.price).toFixed(2)}
+            </div>
+            <div className="col delete">
+                <button className="button-delete" onClick={handleDelete}>
+                    &times;
+                </button>
+            </div>
         </li>
     );
 };
