@@ -83,4 +83,35 @@
             margin-left: auto;
         }
     }
+
+    .summary {
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        .total-price {
+            grid-column: 3;
+            font-size: 1.2rem;
+        }
+        .free-shipping-progress {
+            grid-column: 2;
+            .text {
+                margin-bottom: 5px;
+            }
+            .bar-wrapper {
+                border: 1px solid;
+                height: 30px;
+                position: relative;
+                .bar {
+                    background-color: rgb(29, 185, 76);
+                    height: 100%;
+                }
+                .bar-text {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
 }

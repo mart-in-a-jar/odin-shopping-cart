@@ -35,7 +35,7 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
         </>
     );
 
-    useHeadingUpdate("shopping cart", setPage)
+    useHeadingUpdate("shopping cart", setPage);
 
     return (
         <div className="cart">
@@ -93,7 +93,7 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
                 />
             </div>
             <div className="col price">{item.item.price}</div>
-            <div className="col total-price">
+            <div className="col total-price price">
                 {(item.amount * item.item.price).toFixed(2)}
             </div>
             <div className="col delete">
@@ -106,7 +106,30 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
 };
 
 const CartSummary = ({ sum }) => {
-    return <div className="total price">{sum}</div>;
+    const amountForFreeShipping = 200;
+    const remaining = (amountForFreeShipping - sum).toFixed(2);
+    const freeShipping = sum >= amountForFreeShipping;
+
+    const barStyle = {
+        width: `${freeShipping ? 100 : (sum / amountForFreeShipping) * 100}%`,
+    };
+
+    return (
+        <div className="summary">
+            <div className="total-price">Sum total: ${sum}</div>
+            <div className="free-shipping-progress">
+                <div className="text">
+                    {freeShipping
+                        ? "Order qualifies for free shipping"
+                        : `$${remaining} left for free shipping`}
+                </div>
+                <div className="bar-wrapper">
+                    <div className="bar" style={barStyle}></div>
+                    <div className="bar-text">{freeShipping ? "🎉" : `$${sum} / $${amountForFreeShipping}`}</div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Cart;
