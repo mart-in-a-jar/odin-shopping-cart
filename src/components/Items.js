@@ -4,7 +4,7 @@ import "./Items.scss";
 import urlSlug from "url-slug";
 import AmountPicker from "./AmountPicker";
 
-const Items = ({ addToCart }) => {
+const Items = ({ addToCart, setPage }) => {
     const shopUrl = "https://fakestoreapi.com/products";
     const urlParams = useParams();
 
@@ -57,6 +57,11 @@ const Items = ({ addToCart }) => {
         };
         setCategoryFromUrl();
     }, [allCategories, urlParams.category]);
+
+    // Set current page header
+    useEffect(() => {
+        setPage(currentCategory.name);
+    }, [currentCategory.name]);
 
     // Fetch items
     useEffect(() => {
@@ -143,7 +148,7 @@ const ItemCard = ({ item, addToCart }) => {
             </Link>
             <div className="divider"></div>
             <div className="product-card-actions">
-                <div className="price">{(item.price).toFixed(2)}</div>
+                <div className="price">{item.price.toFixed(2)}</div>
                 <AddToCartModule item={item} addToCartFunc={addToCart} />
             </div>
         </div>
@@ -161,7 +166,7 @@ const AddToCartModule = ({ item, addToCartFunc }) => {
 
     return (
         <div className="add-to-cart">
-            <AmountPicker onChange={setAmount} amount={amount}/>
+            <AmountPicker onChange={setAmount} amount={amount} />
             <div className="add-to-cart-button">
                 <button onClick={addToCart}>Add to cart</button>
             </div>

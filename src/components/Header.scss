@@ -38,6 +38,12 @@ nav {
     cursor: pointer;
 }
 
-.header {
+header {
+    display: flex;
     border: 1px dashed green;
+    justify-content: space-between;
+    h2 {
+        margin-left: 50px;
+        text-transform: uppercase;
+    }
 }

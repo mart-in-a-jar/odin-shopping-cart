@@ -11,6 +11,7 @@ function App() {
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
+    const [currentPage, setCurrentPage] = useState("Home");
 
     const addToCart = (item, amount) => {
         setCartItems((prevCart) => {
@@ -72,16 +73,26 @@ function App() {
     return (
         <div className="main">
             <BrowserRouter>
-                <Header cartAmount={numberOfItemsInCart} />
+                <Header cartAmount={numberOfItemsInCart} page={currentPage} />
                 <Routes>
                     <Route path="/" element={<div>Hei home page</div>} />
                     <Route
                         path="/items/category/:category"
-                        element={<Items addToCart={addToCart} />}
+                        element={
+                            <Items
+                                addToCart={addToCart}
+                                setPage={setCurrentPage}
+                            />
+                        }
                     />
                     <Route
                         path="/items/:id"
-                        element={<Item addToCart={addToCart} />}
+                        element={
+                            <Item
+                                addToCart={addToCart}
+                                setPage={setCurrentPage}
+                            />
+                        }
                     />
                     <Route
                         path="/cart"

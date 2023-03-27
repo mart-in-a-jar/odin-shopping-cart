@@ -3,19 +3,34 @@ import AmountPicker from "./AmountPicker";
 import "./Cart.scss";
 
 const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
+    const cartHeader = (
+        <div className="cart-header">
+            <button
+                className="delete-all"
+                onClick={() => {
+                    deleteProduct(null, true);
+                }}
+            >
+                Clear basket
+            </button>
+        </div>
+    );
+
     const cartContent = (
         <>
             <CartItemsHeader />
-            {items.map((item) => {
-                return (
-                    <CartItemLine
-                        key={item.item.id}
-                        item={item}
-                        changeAmount={changeAmount}
-                        deleteProduct={deleteProduct}
-                    />
-                );
-            })}
+            <ul className="item-lines">
+                {items.map((item) => {
+                    return (
+                        <CartItemLine
+                            key={item.item.id}
+                            item={item}
+                            changeAmount={changeAmount}
+                            deleteProduct={deleteProduct}
+                        />
+                    );
+                })}
+            </ul>
         </>
     );
 
@@ -24,13 +39,9 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal }) => {
             {items.length > 0 ? (
                 // If items
                 <>
-                    <div className="cart-items">
-                        <ul className="item-lines">{cartContent}</ul>
-                    </div>
-                    <button className="deleteAll" onClick={() => {
-                        deleteProduct(null, true)
-                    }}>Clear basket</button>
-                    <div className="total price">{sumTotal}</div>
+                    {cartHeader}
+                    <div className="cart-items">{cartContent}</div>
+                    <CartSummary sum={sumTotal} />
                 </>
             ) : (
                 // If empty cart
@@ -89,6 +100,10 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
             </div>
         </li>
     );
+};
+
+const CartSummary = ({ sum }) => {
+    return <div className="total price">{sum}</div>;
 };
 
 export default Cart;
