@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
+    const [cartTotal, setCartTotal] = useState(0);
     const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
 
     const addToCart = (item, amount) => {
@@ -47,13 +48,22 @@ function App() {
         }
     }, []);
 
+    // When cart items update
     useEffect(() => {
+        // Update number of items in cart
         const amount = cartItems.reduce((a, b) => {
             return a + b.amount;
         }, 0);
         setNumberOfItemsInCart(amount);
 
+        // Save to localStorage
         localStorage.setItem("cart", JSON.stringify(cartItems));
+
+        // Update total sum
+        const sum = cartItems.reduce((a, b) => {
+            return a + b.amount * b.item.price;
+        }, 0).toFixed(2);
+        setCartTotal(sum);
     }, [cartItems]);
 
     return (
@@ -77,6 +87,7 @@ function App() {
                                 items={cartItems}
                                 changeAmount={addToCart}
                                 deleteProduct={deleteFromCart}
+                                sumTotal={cartTotal}
                             />
                         }
                     />
