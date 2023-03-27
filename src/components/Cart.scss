@@ -14,8 +14,14 @@
             .item-name {
                 text-transform: uppercase;
                 font-weight: bold;
+                color: black;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
             }
             .description {
+                margin-top: 4px;
                 font-size: 0.8rem;
                 /* cut overflowing text */
                 height: 4em;

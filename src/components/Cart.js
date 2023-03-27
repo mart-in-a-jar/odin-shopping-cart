@@ -83,7 +83,9 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
                 </Link>
             </div>
             <div className="text">
-                <div className="item-name">{item.item.title}</div>
+                <Link to={`/items/${item.item.id}`} className="item-name">
+                    {item.item.title}
+                </Link>
                 <div className="description">{item.item.description}</div>
             </div>
             <div className="col amount">
@@ -125,7 +127,11 @@ const CartSummary = ({ sum }) => {
                 </div>
                 <div className="bar-wrapper">
                     <div className="bar" style={barStyle}></div>
-                    <div className="bar-text">{freeShipping ? "🎉" : `$${sum} / $${amountForFreeShipping}`}</div>
+                    <div className="bar-text">
+                        {freeShipping
+                            ? "🎉"
+                            : `$${sum} / $${amountForFreeShipping}`}
+                    </div>
                 </div>
             </div>
             <div className="checkout">
