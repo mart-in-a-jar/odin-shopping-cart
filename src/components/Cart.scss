@@ -17,6 +17,13 @@
             }
             .description {
                 font-size: 0.8rem;
+                /* cut overflowing text */
+                height: 4em;
+                line-height: 1em;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
             }
             .price {
                 font-size: 1rem;
