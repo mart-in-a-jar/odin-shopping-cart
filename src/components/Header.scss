@@ -13,6 +13,9 @@ header {
         background-color: burlywood;
         color: rgb(80, 52, 16);
         font-weight: bold;
+        &.animate {
+            animation: scale 350ms;
+        }
     }
 
     .cart-icon {
@@ -46,4 +49,10 @@ header {
     border-radius: 5px;
     padding: 8px;
     cursor: pointer;
+}
+
+@keyframes scale {
+    to {
+        transform: scale(0.35);
+    }
 }

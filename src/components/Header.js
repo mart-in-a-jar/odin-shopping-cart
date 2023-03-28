@@ -2,8 +2,19 @@ import { NavLink } from "react-router-dom";
 import "./Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { useEffect, useState } from "react";
 
 const Header = ({ cartAmount, page }) => {
+    // Animate cart icon on change
+    const [animate, setAnimate] = useState(false);
+
+    useEffect(() => {
+        setAnimate(true);
+        setTimeout(() => {
+            setAnimate(false);
+        }, 350);
+    }, [cartAmount]);
+    
     return (
         <header>
             <h2>{page}</h2>
@@ -22,7 +33,12 @@ const Header = ({ cartAmount, page }) => {
                                     icon={solid("cart-shopping")}
                                 />
                                 {cartAmount > 0 ? (
-                                    <span className="fa-layers-counter cart-amount">
+                                    <span
+                                        className={
+                                            "fa-layers-counter cart-amount" +
+                                            (animate ? " animate" : "")
+                                        }
+                                    >
                                         {cartAmount}
                                     </span>
                                 ) : (
