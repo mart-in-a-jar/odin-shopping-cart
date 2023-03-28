@@ -1,0 +1,45 @@
+.product-page {
+    .main-info {
+        display: grid;
+        grid-template:
+            "title ." auto
+            "image ." auto
+            "image actions" auto
+            / 800px 1fr;
+        column-gap: 20px;
+        padding: 10px 20px;
+
+        .title {
+            grid-area: title;
+        }
+        .image {
+            grid-area: image;
+            border: 1px solid;
+            height: 500px;
+        }
+
+        .cart-actions {
+            grid-area: actions;
+            display: grid;
+            grid-template:
+                "price ."
+                "amount add" / 1fr 2fr;
+            gap: 15px;
+            .price {
+                grid-area: price;
+                font-size: 2rem;
+            }
+            .amount-picker {
+                // max-width: 100px;
+                grid-area: amount;
+            }
+            button.add-to-cart {
+                grid-area: add;
+                background-color: rgb(238, 173, 53);
+                border-radius: 20px;
+                border: 0;
+                padding: 15px 15px;
+            }
+        }
+    }
+}

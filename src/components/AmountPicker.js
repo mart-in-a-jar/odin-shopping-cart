@@ -4,9 +4,10 @@ import "./AmountPicker.scss";
 export default function AmountPicker({ onChange, amount }) {
     const [displayedAmount, setDisplayedAmount] = useState(amount);
     const [actualAmount, setActualAmount] = useState(amount);
+    const MAXAMOUNT = 99;
 
     const handleInput = ({ target }) => {
-        if (target.value > 0 && target.value < 100) {
+        if (target.value > 0 && target.value <= MAXAMOUNT) {
             setDisplayedAmount(+target.value);
         } else if (target.value === "") {
             setDisplayedAmount("");
@@ -21,7 +22,7 @@ export default function AmountPicker({ onChange, amount }) {
         }
     };
     useEffect(() => {
-        if (displayedAmount > 0 && displayedAmount < 100) {
+        if (displayedAmount > 0 && displayedAmount <= MAXAMOUNT) {
             setActualAmount(displayedAmount);
         }
     }, [displayedAmount]);
@@ -56,7 +57,7 @@ export default function AmountPicker({ onChange, amount }) {
                 onBlur={handleBlur}
             />
             <button
-                disabled={actualAmount >= 99}
+                disabled={actualAmount >= MAXAMOUNT}
                 onClick={() => {
                     setDisplayedAmount((prevAmount) => {
                         return prevAmount + 1;

@@ -47,6 +47,9 @@
                     cursor: pointer;
                     font-size: 2rem;
                     color: red;
+                    &:hover {
+                        color: rgb(182, 0, 0)
+                    }
                 }
             }
         }

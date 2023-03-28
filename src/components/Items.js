@@ -116,7 +116,7 @@ const Items = ({ addToCart, setPage }) => {
     });
 
     return (
-        <div className="product-page">
+        <div className="all-products">
             <ItemMenu onClick={setCurrentCategory} categories={allCategories} />
             <div className="items">{products}</div>
             {displayLoadButton && <LoadMoreButton loadMore={loadMore} />}

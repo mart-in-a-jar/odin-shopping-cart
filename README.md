@@ -5,3 +5,6 @@ React project
 
 - Routing
 - scss
+- custom hook
+- custom amount picker
+- react-modal-image
