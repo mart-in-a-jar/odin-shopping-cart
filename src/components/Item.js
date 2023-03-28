@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ModalImage from "react-modal-image";
+
 import AmountPicker from "./AmountPicker";
 import useHeadingUpdate from "./useHeadingUpdate";
 import "./Item.scss";
@@ -37,7 +39,15 @@ const ProductView = ({ item, addAction }) => {
     return (
         <div className="main-info">
             <h1 className="title">{item.title}</h1>
-            <div className="image">image</div>
+            <div className="image">
+                <ModalImage
+                    small={item.image}
+                    large={item.image}
+                    alt={item.title}
+                    hideDownload
+                    hideZoom
+                />
+            </div>
             <CartActions item={item} addAction={addAction} />
         </div>
     );

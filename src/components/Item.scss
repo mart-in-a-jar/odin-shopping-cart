@@ -14,8 +14,9 @@
         }
         .image {
             grid-area: image;
-            border: 1px solid;
-            height: 500px;
+            img:not([class*="modal"]) {
+                height: 500px;
+            }
         }
 
         .cart-actions {
@@ -30,7 +31,6 @@
                 font-size: 2rem;
             }
             .amount-picker {
-                // max-width: 100px;
                 grid-area: amount;
             }
             button.add-to-cart {
