@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ModalImage from "react-modal-image";
+import urlSlug from "url-slug";
 
 import AmountPicker from "./AmountPicker";
 import useHeadingUpdate from "./useHeadingUpdate";
@@ -26,6 +27,7 @@ const Item = ({ addToCart, setPage }) => {
     return (
         <div className="product-page">
             <ProductView item={item} addAction={addToCart} />
+            <ProductDescription item={item} />
             <pre style={{ whiteSpace: "pre-wrap" }}>
                 {JSON.stringify(item, null, 2)}
             </pre>
@@ -39,6 +41,12 @@ const ProductView = ({ item, addAction }) => {
     return (
         <div className="main-info">
             <h1 className="title">{item.title}</h1>
+            <div className="category">
+                See all{" "}
+                <Link to={"/items/category/" + urlSlug(item.category)}>
+                    {item.category}
+                </Link>
+            </div>
             <div className="image">
                 <ModalImage
                     small={item.image}
@@ -48,6 +56,7 @@ const ProductView = ({ item, addAction }) => {
                     hideZoom
                 />
             </div>
+            <ProductRating item={item} />
             <CartActions item={item} addAction={addAction} />
         </div>
     );
@@ -65,8 +74,25 @@ const CartActions = ({ item, addAction }) => {
             <div className="price">{item.price}</div>
             <AmountPicker onChange={setAmount} amount={amount} />
             <button className="button add-to-cart" onClick={addToCart}>
-                add to cart
+                Add to cart
             </button>
+        </div>
+    );
+};
+
+const ProductDescription = ({ item }) => {
+    return (
+        <div className="description">
+            <h3>Product description</h3>
+            <p>{item.description}</p>
+        </div>
+    );
+};
+
+const ProductRating = ({ item }) => {
+    return (
+        <div className="rating">
+            rating: {item.rating?.rate}, {item.rating?.count} votes
         </div>
     );
 };
