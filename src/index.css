@@ -21,3 +21,7 @@ body {
     border: 3px dotted;
     min-height: 100vh;
 }
+
+:root {
+    --yellow-color: rgb(238, 173, 53);
+}

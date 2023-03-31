@@ -8,3 +8,4 @@
 - custom hook
 - custom amount picker
 - react-modal-image
+- https://fakestoreapi.com

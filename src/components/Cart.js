@@ -2,10 +2,24 @@ import { Link } from "react-router-dom";
 import AmountPicker from "./AmountPicker";
 import "./Cart.scss";
 import useHeadingUpdate from "./useHeadingUpdate";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { useState } from "react";
 
 const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
+    const [showDescription, setShowDescription] = useState(false);
     const cartHeader = (
         <div className="cart-header">
+            <FormControlLabel
+                control={
+                    <Switch
+                        onChange={() => {
+                            setShowDescription(!showDescription);
+                        }}
+                    />
+                }
+                label="Display descriptions"
+            />
             <button
                 className="delete-all"
                 onClick={() => {
@@ -28,6 +42,7 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
                             item={item}
                             changeAmount={changeAmount}
                             deleteProduct={deleteProduct}
+                            description={showDescription}
                         />
                     );
                 })}
@@ -67,7 +82,7 @@ const CartItemsHeader = () => {
     );
 };
 
-const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
+const CartItemLine = ({ item, changeAmount, deleteProduct, description }) => {
     const handleChangeAmount = (amount) => {
         changeAmount(item.item, amount - item.amount);
     };
@@ -86,7 +101,9 @@ const CartItemLine = ({ item, changeAmount, deleteProduct }) => {
                 <Link to={`/items/${item.item.id}`} className="item-name">
                     {item.item.title}
                 </Link>
-                <div className="description">{item.item.description}</div>
+                {description && (
+                    <div className="description">{item.item.description}</div>
+                )}
             </div>
             <div className="col amount">
                 <AmountPicker

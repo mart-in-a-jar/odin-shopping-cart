@@ -60,7 +60,7 @@ const Items = ({ addToCart, setPage }) => {
     }, [allCategories, urlParams.category]);
 
     // Set current page header
-    useHeadingUpdate(currentCategory.name, setPage)
+    useHeadingUpdate(currentCategory.name, setPage);
 
     // Fetch items
     useEffect(() => {

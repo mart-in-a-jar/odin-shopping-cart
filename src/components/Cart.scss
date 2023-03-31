@@ -48,7 +48,7 @@
                     font-size: 2rem;
                     color: red;
                     &:hover {
-                        color: rgb(182, 0, 0)
+                        color: rgb(182, 0, 0);
                     }
                 }
             }
@@ -94,6 +94,12 @@
     .cart-header {
         display: flex;
         margin-top: 5px;
+        .MuiButtonBase-root {
+            color: var(--yellow-color);
+            &.Mui-checked + .MuiSwitch-track {
+                background-color: var(--yellow-color);
+            }
+        }
         .delete-all {
             margin-left: auto;
         }
@@ -136,7 +142,7 @@
 
             button {
                 padding: 20px 50px;
-                background-color: rgb(238, 173, 53);
+                background-color: var(--yellow-color);
                 border: 0;
                 border-radius: 5px;
                 cursor: pointer;
