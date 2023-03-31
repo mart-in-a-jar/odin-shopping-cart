@@ -13,6 +13,8 @@ const Cart = ({
     sumTotal,
     setPage,
     setItemsPurchased,
+    shippingPrice,
+    shippingLimit,
 }) => {
     const [showDescription, setShowDescription] = useState(false);
     const emptyCart = () => {
@@ -69,6 +71,8 @@ const Cart = ({
                         emptyCart={emptyCart}
                         setItemsPurchased={setItemsPurchased}
                         items={items}
+                        shippingPrice={shippingPrice}
+                        shippingLimit={shippingLimit}
                     />
                 </>
             ) : (
@@ -134,23 +138,49 @@ const CartItemLine = ({ item, changeAmount, deleteProduct, description }) => {
     );
 };
 
-const CartSummary = ({ sum, emptyCart, setItemsPurchased, items }) => {
-    const amountForFreeShipping = 200;
-    const remaining = (amountForFreeShipping - sum).toFixed(2);
-    const freeShipping = sum >= amountForFreeShipping;
+const CartSummary = ({
+    sum,
+    emptyCart,
+    setItemsPurchased,
+    items,
+    shippingPrice,
+    shippingLimit,
+}) => {
+    const remaining = (shippingLimit - sum).toFixed(2);
+    const freeShipping = sum >= shippingLimit;
 
     const barStyle = {
-        width: `${freeShipping ? 100 : (sum / amountForFreeShipping) * 100}%`,
+        width: `${freeShipping ? 100 : (sum / shippingLimit) * 100}%`,
     };
 
     const handelCheckout = () => {
-        setItemsPurchased(items);
+        setItemsPurchased({ items, shipping: shippingPrice });
         emptyCart();
     };
 
     return (
         <div className="summary">
-            <div className="total-price">Sum total: ${sum}</div>
+            <div className="prices">
+                {shippingPrice !== 0 ? (
+                    <>
+                        <div className="total-price products">
+                            <span>Products:</span>
+                            <span className="amount">${sum.toFixed(2)}</span>
+                        </div>
+                        <div className="total-price shipping">
+                            <span>Shipping:</span>
+                            <span className="amount">${shippingPrice}</span>
+                        </div>
+                    </>
+                ) : ""}
+                <div className="total-price sum">
+                    <span>Total:</span>
+                    <span className="amount">
+                        ${(sum + shippingPrice).toFixed(2)}
+                    </span>
+                </div>
+            </div>
+
             <div className="free-shipping-progress">
                 <div className="text">
                     {freeShipping
@@ -160,9 +190,7 @@ const CartSummary = ({ sum, emptyCart, setItemsPurchased, items }) => {
                 <div className="bar-wrapper">
                     <div className="bar" style={barStyle}></div>
                     <div className="bar-text">
-                        {freeShipping
-                            ? "🎉"
-                            : `$${sum} / $${amountForFreeShipping}`}
+                        {freeShipping ? "🎉" : `$${sum} / $${shippingLimit}`}
                     </div>
                 </div>
             </div>

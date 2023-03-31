@@ -110,9 +110,18 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         row-gap: 10px;
-        .total-price {
+        .prices {
             grid-column: 3;
             font-size: 1.2rem;
+            justify-self: center;
+            .total-price {
+                display: flex;
+                justify-content: space-between;
+                width: 250px;
+                &.sum {
+                    font-weight: bold;
+                }
+            }
         }
         .free-shipping-progress {
             grid-column: 2;
@@ -136,7 +145,7 @@
             }
         }
         .checkout {
-            grid-row: 3;
+            grid-row: 5;
             grid-column: 3;
             justify-self: center;
 

@@ -10,11 +10,15 @@ import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 
 function App() {
+    const limitForFreeShipping = 200;
+    const shippingPrice = 10;
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
     const [currentPage, setCurrentPage] = useState("Home");
     const [itemsPurchased, setItemsPurchased] = useState([]);
+    const [currentShippingPrice, setCurrentShippingPrice] =
+        useState(shippingPrice);
 
     const addToCart = (item, amount) => {
         setCartItems((prevCart) => {
@@ -65,13 +69,18 @@ function App() {
         localStorage.setItem("cart", JSON.stringify(cartItems));
 
         // Update total sum
-        const sum = cartItems
-            .reduce((a, b) => {
-                return a + b.amount * b.item.price;
-            }, 0)
-            .toFixed(2);
+        const sum = cartItems.reduce((a, b) => {
+            return a + b.amount * b.item.price;
+        }, 0);
         setCartTotal(sum);
     }, [cartItems]);
+
+    useEffect(() => {
+        // Update shipping price
+        if (cartTotal >= limitForFreeShipping) {
+            setCurrentShippingPrice(0);
+        } else setCurrentShippingPrice(shippingPrice);
+    }, [cartTotal]);
 
     return (
         <div className="main">
@@ -110,6 +119,8 @@ function App() {
                                 sumTotal={cartTotal}
                                 setPage={setCurrentPage}
                                 setItemsPurchased={setItemsPurchased}
+                                shippingPrice={currentShippingPrice}
+                                shippingLimit={limitForFreeShipping}
                             />
                         }
                     />
@@ -117,7 +128,7 @@ function App() {
                         path="/cart/checkout"
                         element={
                             <Checkout
-                                items={itemsPurchased}
+                                cart={itemsPurchased}
                                 setPage={setCurrentPage}
                             />
                         }
