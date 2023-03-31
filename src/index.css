@@ -18,10 +18,10 @@ body {
 
 .main {
     width: 1200px;
-    border: 3px dotted;
     min-height: 100vh;
 }
 
 :root {
     --yellow-color: rgb(238, 173, 53);
+    --yellow-color-trans: rgba(238, 173, 53, 0.418);
 }

@@ -1,4 +1,5 @@
 import useHeadingUpdate from "./useHeadingUpdate";
+import "./Home.scss";
 
 const Home = ({ setPage }) => {
     useHeadingUpdate("home", setPage);

@@ -13,7 +13,7 @@
         padding: 10px;
     }
     .product-card {
-        border: 1px dashed;
+        border: 1px solid var(--yellow-color-trans);
         padding: 15px;
 
         a {
@@ -48,7 +48,7 @@
     .divider {
         margin: 0 -15px 15px;
         padding-bottom: 15px;
-        border-bottom: 1px dashed;
+        border-bottom: 1px solid var(--yellow-color-trans);
     }
 
     .item-menu {
