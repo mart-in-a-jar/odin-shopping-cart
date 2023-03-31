@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ModalImage from "react-modal-image";
+import Rating from "@mui/material/Rating";
 import urlSlug from "url-slug";
 
 import AmountPicker from "./AmountPicker";
@@ -28,9 +29,6 @@ const Item = ({ addToCart, setPage }) => {
         <div className="product-page">
             <ProductView item={item} addAction={addToCart} />
             <ProductDescription item={item} />
-            <pre style={{ whiteSpace: "pre-wrap" }}>
-                {JSON.stringify(item, null, 2)}
-            </pre>
         </div>
     );
 };
@@ -90,9 +88,18 @@ const ProductDescription = ({ item }) => {
 };
 
 const ProductRating = ({ item }) => {
+    const [rating, setRating] = useState(null);
+
+    useEffect(() => {
+        setRating(item.rating?.rate);
+    }, [item.rating?.rate]);
+
+    const votes = item.rating?.count;
+
     return (
         <div className="rating">
-            rating: {item.rating?.rate}, {item.rating?.count} votes
+            <Rating readOnly precision={0.1} value={rating} />
+            <span>{rating}</span> <span className="votes">{votes} votes</span>
         </div>
     );
 };

@@ -25,6 +25,14 @@
         }
         .rating {
             grid-area: rating;
+            display: grid;
+            grid-template-columns: max-content auto;
+            align-items: center;
+            gap: 10px;
+            .votes {
+                color: rgba(0, 0, 0, 0.664);
+                padding-left: 4px;
+            }
         }
         .category {
             justify-self: end;
