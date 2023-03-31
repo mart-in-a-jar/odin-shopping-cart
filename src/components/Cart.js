@@ -6,8 +6,18 @@ import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 
-const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
+const Cart = ({
+    items,
+    changeAmount,
+    deleteProduct,
+    sumTotal,
+    setPage,
+    setItemsPurchased,
+}) => {
     const [showDescription, setShowDescription] = useState(false);
+    const emptyCart = () => {
+        deleteProduct(null, true);
+    };
     const cartHeader = (
         <div className="cart-header">
             <FormControlLabel
@@ -20,12 +30,7 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
                 }
                 label="Display descriptions"
             />
-            <button
-                className="delete-all"
-                onClick={() => {
-                    deleteProduct(null, true);
-                }}
-            >
+            <button className="delete-all" onClick={emptyCart}>
                 Clear cart
             </button>
         </div>
@@ -59,7 +64,12 @@ const Cart = ({ items, changeAmount, deleteProduct, sumTotal, setPage }) => {
                 <>
                     {cartHeader}
                     <div className="cart-items">{cartContent}</div>
-                    <CartSummary sum={sumTotal} />
+                    <CartSummary
+                        sum={sumTotal}
+                        emptyCart={emptyCart}
+                        setItemsPurchased={setItemsPurchased}
+                        items={items}
+                    />
                 </>
             ) : (
                 // If empty cart
@@ -124,13 +134,18 @@ const CartItemLine = ({ item, changeAmount, deleteProduct, description }) => {
     );
 };
 
-const CartSummary = ({ sum }) => {
+const CartSummary = ({ sum, emptyCart, setItemsPurchased, items }) => {
     const amountForFreeShipping = 200;
     const remaining = (amountForFreeShipping - sum).toFixed(2);
     const freeShipping = sum >= amountForFreeShipping;
 
     const barStyle = {
         width: `${freeShipping ? 100 : (sum / amountForFreeShipping) * 100}%`,
+    };
+
+    const handelCheckout = () => {
+        setItemsPurchased(items);
+        emptyCart();
     };
 
     return (
@@ -152,7 +167,9 @@ const CartSummary = ({ sum }) => {
                 </div>
             </div>
             <div className="checkout">
-                <button>Checkout</button>
+                <Link to="./checkout" onClick={handelCheckout}>
+                    <button>Checkout</button>
+                </Link>
             </div>
         </div>
     );

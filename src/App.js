@@ -7,12 +7,14 @@ import Item from "./components/Item";
 import Items from "./components/Items";
 import { useEffect, useState } from "react";
 import Home from "./components/Home";
+import Checkout from "./components/Checkout";
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [numberOfItemsInCart, setNumberOfItemsInCart] = useState(0);
     const [currentPage, setCurrentPage] = useState("Home");
+    const [itemsPurchased, setItemsPurchased] = useState([]);
 
     const addToCart = (item, amount) => {
         setCartItems((prevCart) => {
@@ -76,7 +78,10 @@ function App() {
             <BrowserRouter>
                 <Header cartAmount={numberOfItemsInCart} page={currentPage} />
                 <Routes>
-                    <Route path="/" element={<Home setPage={setCurrentPage} />} />
+                    <Route
+                        path="/"
+                        element={<Home setPage={setCurrentPage} />}
+                    />
                     <Route
                         path="/items/category/:category"
                         element={
@@ -103,6 +108,16 @@ function App() {
                                 changeAmount={addToCart}
                                 deleteProduct={deleteFromCart}
                                 sumTotal={cartTotal}
+                                setPage={setCurrentPage}
+                                setItemsPurchased={setItemsPurchased}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/cart/checkout"
+                        element={
+                            <Checkout
+                                items={itemsPurchased}
                                 setPage={setCurrentPage}
                             />
                         }
