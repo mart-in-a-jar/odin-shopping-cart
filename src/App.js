@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom"; // For gh-pages
 import urlSlug from "url-slug";
 import { useEffect, useState } from "react";
 
@@ -110,7 +111,9 @@ function App() {
 
     return (
         <div className="main">
-            <BrowserRouter>
+            {/* <BrowserRouter> */}
+            {/* Hashrouter for gh-pages */}
+            <HashRouter>
                 <Header cartAmount={numberOfItemsInCart} page={currentPage} />
                 <Routes>
                     <Route
@@ -169,7 +172,9 @@ function App() {
                     />
                 </Routes>
                 <Footer />
-            </BrowserRouter>
+                {/* Hashrouter for gh-pages */}
+            </HashRouter>
+            {/* </BrowserRouter> */}
         </div>
     );
 }
