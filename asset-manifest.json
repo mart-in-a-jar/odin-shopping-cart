@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/odin-shopping-cart/static/css/main.adc5d6c5.css",
-    "main.js": "/odin-shopping-cart/static/js/main.53e9392e.js",
+    "main.js": "/odin-shopping-cart/static/js/main.0d592e5b.js",
     "static/media/all_items.jpg": "/odin-shopping-cart/static/media/all_items.f5520337c7dac21064d1.jpg",
     "static/media/jewelery.jpg": "/odin-shopping-cart/static/media/jewelery.7b7abf68d23d57764411.jpg",
     "static/media/womens_clothing.jpg": "/odin-shopping-cart/static/media/womens_clothing.3cde743a91c1ee95f09a.jpg",
@@ -9,10 +9,10 @@
     "static/media/mens_clothing.jpg": "/odin-shopping-cart/static/media/mens_clothing.9c06b44640dd81d3a313.jpg",
     "index.html": "/odin-shopping-cart/index.html",
     "main.adc5d6c5.css.map": "/odin-shopping-cart/static/css/main.adc5d6c5.css.map",
-    "main.53e9392e.js.map": "/odin-shopping-cart/static/js/main.53e9392e.js.map"
+    "main.0d592e5b.js.map": "/odin-shopping-cart/static/js/main.0d592e5b.js.map"
   },
   "entrypoints": [
     "static/css/main.adc5d6c5.css",
-    "static/js/main.53e9392e.js"
+    "static/js/main.0d592e5b.js"
   ]
 }
