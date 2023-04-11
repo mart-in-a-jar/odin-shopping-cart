@@ -65,7 +65,13 @@ const Items = ({
         if (shouldFetchItems) {
             getItems();
         }
-    }, [amount, currentCategory, shouldFetchItems, CATEGORIESTEMPLATE.name, shopUrl]);
+    }, [
+        amount,
+        currentCategory,
+        shouldFetchItems,
+        CATEGORIESTEMPLATE.name,
+        shopUrl,
+    ]);
 
     // Show/hide "load more.."
     useEffect(() => {
@@ -108,9 +114,7 @@ const Items = ({
 const LoadMoreButton = ({ loadMore }) => {
     return (
         <div className="load-more">
-            <button className="button" onClick={loadMore}>
-                Load more..
-            </button>
+            <button onClick={loadMore}>Load more..</button>
         </div>
     );
 };

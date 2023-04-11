@@ -41,14 +41,15 @@ header {
             text-decoration: none;
         }
     }
-}
-.menu-item,
-.button {
-    background-color: transparent;
-    border: 2px solid;
-    border-radius: 5px;
-    padding: 8px;
-    cursor: pointer;
+    .menu-item {
+        border: 0;
+        padding: 25px 15px;
+        cursor: pointer;
+        border-radius: 0;
+        &:hover {
+            background-color: var(--yellow-color-trans2);
+        }
+    }
 }
 
 @keyframes scale {

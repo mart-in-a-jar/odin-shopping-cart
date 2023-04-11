@@ -4,6 +4,13 @@
         justify-content: center;
         margin-top: 8px;
         margin-bottom: 50px;
+        button {
+            background-color: transparent;
+            border: 1.5px solid var(--yellow-color);
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+        }
     }
 
     .items {

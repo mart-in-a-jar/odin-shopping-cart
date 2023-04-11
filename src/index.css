@@ -26,4 +26,5 @@ body {
 :root {
     --yellow-color: rgb(238, 173, 53);
     --yellow-color-trans: rgba(238, 173, 53, 0.418);
+    --yellow-color-trans2: rgba(238, 173, 53, 0.575);
 }
