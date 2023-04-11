@@ -19,6 +19,8 @@ body {
 .main {
     width: 1200px;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 :root {

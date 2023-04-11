@@ -8,6 +8,7 @@ import Items from "./components/Items";
 import { useEffect, useState } from "react";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout";
+import Footer from "./components/Footer";
 
 function App() {
     const limitForFreeShipping = 200;
@@ -134,6 +135,7 @@ function App() {
                         }
                     />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     );
