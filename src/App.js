@@ -1,16 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import urlSlug from "url-slug";
+import { useEffect, useState } from "react";
 
 //Own components
 import Header from "./components/Header";
 import Cart from "./components/Cart";
 import Item from "./components/Item";
 import Items from "./components/Items";
-import { useEffect, useState } from "react";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 import Footer from "./components/Footer";
 
 function App() {
+    const CATEGORIESTEMPLATE = {
+        name: "all items",
+        slug: urlSlug("all items"),
+    };
+
+    const shopUrl = "https://fakestoreapi.com/products";
     const limitForFreeShipping = 200;
     const shippingPrice = 10;
     const [cartItems, setCartItems] = useState([]);
@@ -20,6 +27,24 @@ function App() {
     const [itemsPurchased, setItemsPurchased] = useState([]);
     const [currentShippingPrice, setCurrentShippingPrice] =
         useState(shippingPrice);
+    const [allCategories, setAllCategories] = useState([]);
+
+    // On mount, fetch categories
+    useEffect(() => {
+        const getCategories = async () => {
+            const response = await fetch(shopUrl + "/categories").then((res) =>
+                res.json()
+            );
+            const categories = response.map((cat) => {
+                return {
+                    name: cat,
+                    slug: urlSlug(cat),
+                };
+            });
+            setAllCategories([CATEGORIESTEMPLATE, ...categories]);
+        };
+        getCategories();
+    }, []);
 
     const addToCart = (item, amount) => {
         setCartItems((prevCart) => {
@@ -98,6 +123,9 @@ function App() {
                             <Items
                                 addToCart={addToCart}
                                 setPage={setCurrentPage}
+                                shopUrl={shopUrl}
+                                allCategories={allCategories}
+                                CATEGORIESTEMPLATE={CATEGORIESTEMPLATE}
                             />
                         }
                     />

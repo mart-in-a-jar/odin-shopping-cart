@@ -1,45 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import "./Items.scss";
-import urlSlug from "url-slug";
 import AmountPicker from "./AmountPicker";
 import useHeadingUpdate from "./useHeadingUpdate";
 
-const Items = ({ addToCart, setPage }) => {
-    const shopUrl = "https://fakestoreapi.com/products";
+const Items = ({
+    addToCart,
+    setPage,
+    shopUrl,
+    allCategories,
+    CATEGORIESTEMPLATE,
+}) => {
     const urlParams = useParams();
-
-    // Get this as a parameter?
-    const CATEGORIESTEMPLATE = {
-        name: "all items",
-        slug: urlSlug("all items"),
-    };
 
     const ITEMSTODISPLAYINITIALLY = 6;
 
     const [items, setItems] = useState([]);
     const [amount, setAmount] = useState(ITEMSTODISPLAYINITIALLY);
     const [currentCategory, setCurrentCategory] = useState(CATEGORIESTEMPLATE);
-    const [allCategories, setAllCategories] = useState([CATEGORIESTEMPLATE]);
     const [displayLoadButton, setDisplayLoadButton] = useState(true);
     const [shouldFetchItems, setShouldFetchItems] = useState(false);
-
-    // On mount, fetch categories
-    useEffect(() => {
-        const getCategories = async () => {
-            const response = await fetch(shopUrl + "/categories").then((res) =>
-                res.json()
-            );
-            const categories = response.map((cat) => {
-                return {
-                    name: cat,
-                    slug: urlSlug(cat),
-                };
-            });
-            setAllCategories([CATEGORIESTEMPLATE, ...categories]);
-        };
-        getCategories();
-    }, []);
 
     // Get current category from URL
     useEffect(() => {
@@ -85,7 +65,7 @@ const Items = ({ addToCart, setPage }) => {
         if (shouldFetchItems) {
             getItems();
         }
-    }, [amount, currentCategory, shouldFetchItems, CATEGORIESTEMPLATE.name]);
+    }, [amount, currentCategory, shouldFetchItems, CATEGORIESTEMPLATE.name, shopUrl]);
 
     // Show/hide "load more.."
     useEffect(() => {
