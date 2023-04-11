@@ -71,7 +71,7 @@ const CartActions = ({ item, addAction }) => {
         <div className="cart-actions">
             <div className="price">{item.price}</div>
             <AmountPicker onChange={setAmount} amount={amount} />
-            <button className="button add-to-cart" onClick={addToCart}>
+            <button className="add-to-cart" onClick={addToCart}>
                 Add to cart
             </button>
         </div>
