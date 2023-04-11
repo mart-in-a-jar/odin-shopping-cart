@@ -115,7 +115,12 @@ function App() {
                 <Routes>
                     <Route
                         path="/"
-                        element={<Home setPage={setCurrentPage} />}
+                        element={
+                            <Home
+                                setPage={setCurrentPage}
+                                categories={allCategories}
+                            />
+                        }
                     />
                     <Route
                         path="/items/category/:category"
